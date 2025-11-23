@@ -6,9 +6,12 @@
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/NZWalks.API.runtimeconfig.json
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/NZWalks.API.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/NZWalks.API.pdb
+/Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/AutoMapper.dll
+/Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Azure.Core.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Azure.Identity.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Humanizer.dll
+/Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Microsoft.Build.Locator.dll
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Microsoft.CodeAnalysis.dll
@@ -163,4 +166,3 @@
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/obj/Debug/net9.0/NZWalks.API.pdb
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/obj/Debug/net9.0/NZWalks.API.genruntimeconfig.cache
 /Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/obj/Debug/net9.0/ref/NZWalks.API.dll
-/Users/aman/Documents/DotNotProjects/NZWalks/NZWalks/NZWalks.API/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
