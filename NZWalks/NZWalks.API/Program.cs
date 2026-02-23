@@ -134,6 +134,8 @@ app.UseSwaggerUI(c =>
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
