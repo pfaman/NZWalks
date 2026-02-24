@@ -97,9 +97,9 @@ DELETE /api/walks/{id}
 
 🌍 Live Demo
 
-API Base URL:
+API Base URL: https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/
 
-Swagger UI:
+Swagger UI: https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/index.html
 
 📦 How to Run Locally
 
