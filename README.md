@@ -1,124 +1,193 @@
-NZWalks API – Production Ready ASP.NET Core Backend
-📌 Overview
+# 🌿 NZWalks(New Zealand Walks) API– Production Ready ASP.NET Core Backend 
 
-NZWalks API is a production-ready RESTful backend built using ASP.NET Core. The application demonstrates secure authentication, role-based authorization, structured logging, pagination, filtering, and clean architecture principles.
+## 🚀 Overview
 
-This project is designed to simulate real-world backend application development standards.
+**NZWalks API** is a production-grade RESTful backend built using **ASP.NET Core**, following clean architecture principles and enterprise-level best practices.
 
-🚀 Features
+This project simulates a real-world backend system with secure authentication, role-based authorization, structured logging, pagination, filtering, and cloud deployment.
 
-JWT Authentication with Refresh Token
+It demonstrates how modern backend systems are built in professional environments.
 
-Role-Based Authorization (Admin/User)
+---
 
-Pagination, Sorting & Filtering
+## 🏗 Architecture (Layered Clean Architecture)
 
-Global Exception Handling Middleware
+```text
+Controllers  →  Services  →  Repositories  →  Database
+        ↓
+     DTOs + AutoMapper
+        ↓
+Middleware (Exception Handling + Logging)
+```
 
-Structured Logging (Serilog)
+### 🔹 Layers Included
 
-DTO Pattern with AutoMapper
+* API Layer (Controllers)
+* Service Layer (Business Logic)
+* Repository Layer (Data Access)
+* DTO Layer (Data Transfer Objects)
+* Middleware (Centralized Error Handling)
+* Authentication & Authorization Pipeline
 
-Repository Pattern Implementation
+---
 
-Entity Framework Core Integration
+## 🔥 Key Features
 
-Swagger API Documentation
+### 🔐 Security & Authentication
 
-Azure Deployment
+* JWT Access Token
+* Refresh Token Implementation
+* Role-Based Authorization (Admin / User)
+* Secure Endpoints with Policies
 
-🏗 Architecture
+### 📊 Advanced API Capabilities
 
-The project follows a layered architecture:
+* Pagination
+* Sorting
+* Filtering
+* Global Exception Handling Middleware
+* Structured Logging with Serilog
 
-Controllers (API Layer)
+### 🧠 Design Patterns Used
 
-Services Layer (Business Logic)
+* Repository Pattern
+* DTO Pattern
+* Dependency Injection
+* AutoMapper
+* Clean Code Principles
 
-Repository Layer (Data Access)
+---
 
-DTOs for Data Transfer
+## 🛠 Tech Stack
 
-Middleware Pipeline for centralized exception handling
+* ASP.NET Core
+* Entity Framework Core
+* SQL Server
+* JWT Authentication
+* Serilog
+* Swagger / OpenAPI
+* Azure App Service
 
-🛠 Tech Stack
+---
 
-ASP.NET Core
+## 🔐 Authentication Flow
 
-Entity Framework Core
+1️⃣ User Registers / Logs In
+2️⃣ Server Generates:
 
-SQL Server
+* Access Token (Short-lived)
+* Refresh Token (Long-lived)
+  3️⃣ Access Token used for API requests
+  4️⃣ Refresh Token used to generate new Access Token
 
-JWT Authentication
+This simulates real-world secure backend systems.
 
-Serilog
+---
 
-Azure App Service
+## 📌 API Endpoints
 
-Swagger / OpenAPI
+### 🔑 Authentication
 
-🔐 Authentication Flow
+* `POST /api/auth/register`
+* `POST /api/auth/login`
 
-User registers or logs in
+### 🗺 Regions
 
-Server generates Access Token and Refresh Token
+* `GET /api/regions`
+* `GET /api/regions/{id}`
+* `POST /api/regions`
+* `PUT /api/regions/{id}`
+* `DELETE /api/regions/{id}`
 
-Access Token used for authorized API calls
+### 🚶 Walks
 
-Refresh Token used to generate new access token when expired
+* `GET /api/walks`
+* `GET /api/walks/{id}`
+* `POST /api/walks`
+* `PUT /api/walks/{id}`
+* `DELETE /api/walks/{id}`
 
-📊 API Endpoints
+### 🖼 Image Upload
 
-POST /api/auth/register
+* `POST /api/images/upload`
 
-POST /api/auth/login
+---
 
-POST /api/images/upload
+## 🌍 Live Demo
 
-GET /api/regions
+🔗 API Base URL
+[https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/](https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/)
 
-GET /api/regions/{id}
+📘 Swagger UI
+[https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/index.html](https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/index.html)
 
-POST /api/regions
+---
 
-PUT /api/regions/{id}
+## 💻 How To Run Locally
 
-DELETE /api/regions/{id}
+```bash
+git clone <repository-url>
+cd NZWalks.API
+```
 
-GET /api/walks
+### 1️⃣ Configure `appsettings.json`
 
-GET /api/walks/{id}
+* Add SQL Server connection string
+* Add JWT Secret
 
-POST /api/walks
+### 2️⃣ Run Migrations
 
-PUT /api/walks/{id}
+```bash
+dotnet ef database update
+```
 
-DELETE /api/walks/{id}
+### 3️⃣ Run Application
 
-🌍 Live Demo
+```bash
+dotnet run
+```
 
-API Base URL: https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/
+---
 
-Swagger UI: https://app-nzwalks-southindia-dev-001-d3gqh6epgbhza6ag.southindia-01.azurewebsites.net/index.html
+## 📈 Production-Level Concepts Demonstrated
 
-📦 How to Run Locally
+* Secure JWT + Refresh Token Flow
+* Role-Based Access Control
+* Centralized Logging (Serilog)
+* Clean Layered Architecture
+* Cloud Deployment on Azure
+* API Documentation with Swagger
+* Proper HTTP Status Codes
+* Structured Exception Handling
 
-Clone the repository
+---
 
-Configure appsettings.json
+## ☁ Azure Deployment
 
-Update connection string
+The application is deployed on **Azure App Service**, simulating real enterprise deployment workflow.
 
-Run database migrations
+Includes:
 
-Execute the project
+* Environment configuration
+* Production build optimization
+* Secure deployment setup
 
-📈 Future Improvements
+---
 
-Redis Caching
+## 🔮 Future Improvements
 
-Docker Containerization
+* Redis Caching
+* Docker Containerization
+* CI/CD Pipeline (GitHub Actions)
+* API Versioning
+* Unit Testing with xUnit
+* Integration Testing
+* Health Checks Monitoring
 
-CI/CD Pipeline
+---
 
-API Versioning
+## 👨‍💻 Author
+
+Aman Kant Savita
+ASP.NET Core Backend Developer
+2+ Years Experience | JWT | EF Core | Azure
