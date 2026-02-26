@@ -131,9 +131,6 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "NZ Walks API V1");
     c.RoutePrefix = string.Empty; // Root pe open karne ke liye
 });
-
-app.UseMiddleware<GlobalExceptionMiddleware>();
-
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseHttpsRedirection();
