@@ -36,7 +36,6 @@ Middleware (Exception Handling + Logging)
 ### 🔐 Security & Authentication
 
 * JWT Access Token
-* Refresh Token Implementation
 * Role-Based Authorization (Admin / User)
 * Secure Endpoints with Policies
 
@@ -75,10 +74,7 @@ Middleware (Exception Handling + Logging)
 1️⃣ User Registers / Logs In
 2️⃣ Server Generates:
 
-* Access Token (Short-lived)
-* Refresh Token (Long-lived)
-  3️⃣ Access Token used for API requests
-  4️⃣ Refresh Token used to generate new Access Token
+* Access Token
 
 This simulates real-world secure backend systems.
 
@@ -151,7 +147,7 @@ dotnet run
 
 ## 📈 Production-Level Concepts Demonstrated
 
-* Secure JWT + Refresh Token Flow
+* Secure JWT Token Flow
 * Role-Based Access Control
 * Centralized Logging (Serilog)
 * Clean Layered Architecture
