@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using NZWalks.API.Repositories;
+using Microsoft.AspNetCore.Authorization; // 🔹 Add this
 
 namespace NZWalks.API.Controllers
 {
@@ -22,6 +23,8 @@ namespace NZWalks.API.Controllers
         // POST : /api/Auth/Register
         [HttpPost]
         [Route("Register")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
             var identutyuser = new IdentityUser
@@ -50,6 +53,8 @@ namespace NZWalks.API.Controllers
         // POST: /api/Auth/Login
         [HttpPost]
         [Route("Login")]
+        [AllowAnonymous]
+
 
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {

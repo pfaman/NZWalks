@@ -66,7 +66,7 @@ namespace NZWalks.API.Controllers
             var walksDomianModel = await walkRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
 
             // Create an Execption for Global testing
-            throw new Exception("This is an Execption");
+            //  throw new Exception("This is an Execption"); // Commented
             // Map Domain to Dto
             return Ok(Mapper.Map<List<WalkDto>>(walksDomianModel));
         }

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/98f9f6e3-9f90-42b5-9845-3b49a9cd97bc/resourceGroups/rg-nzwalks-southindia-dev-001/providers/Microsoft.Web/sites/app-nzwalks-southindia-dev-001",
+    "appService.deploySubpath": "NZWalks.API/publish"
+}
