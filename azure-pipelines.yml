@@ -1,0 +1,31 @@
+trigger:
+- master
+
+pool:
+  name: 'Default'  # Aapka Mac Agent isi pool mein hai
+
+variables:
+  buildConfiguration: 'Release'
+  # Path to your solution file
+  solutionPath: 'NZWalks/NZWalks.sln'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x'
+
+- script: dotnet restore $(solutionPath)
+  displayName: 'Restore'
+
+- script: dotnet build $(solutionPath) --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build'
+
+- script: dotnet publish NZWalks/NZWalks.API/NZWalks.API.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'AzureConnection' # Ensure this is created in Project Settings
+    appName: 'NZWalks'                   # Azure Portal par app ka naam
+    package: '$(Build.ArtifactStagingDirectory)'
