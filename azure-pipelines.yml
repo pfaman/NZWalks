@@ -3,7 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-yaml
 trigger:
 - main
 
@@ -14,23 +13,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     version: '9.0.x'
 
 - script: dotnet restore
-  displayName: Restore
+  displayName: 'Restore'
 
-- script: dotnet build --configuration $(buildConfiguration) --no-restore
-  displayName: Build
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build'
 
 - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
-  displayName: Publish
+  displayName: 'Publish'
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: '<YOUR-AZURE-SERVICE-CONNECTION>'
-    appName: 'app-nzwalks-southindia-dev-001'
+    azureSubscription: 'AzureConnection' # Isse Step 4 ke baad select karenge
+    appName: 'NZWalks'
     package: '$(Build.ArtifactStagingDirectory)'
+
