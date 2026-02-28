@@ -27,5 +27,8 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'AzureConnection' # Ensure this is created in Project Settings
-    appName: 'NZWalks'                   # Azure Portal par app ka naam
+    appName: 'app-nzwalks-southindia-dev-001' # Yahan sahi naam dalo jo image_8d6560.jpg mein dikh raha hai
     package: '$(Build.ArtifactStagingDirectory)'
+
+
+    
