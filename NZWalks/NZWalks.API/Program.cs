@@ -139,6 +139,22 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+var imagesPath = Path.Combine(builder.Environment.ContentRootPath, "Images");
+
+// 1. Check if folder exists, if not, create it to avoid DirectoryNotFoundException
+if (!Directory.Exists(imagesPath))
+{
+    Directory.CreateDirectory(imagesPath);
+}
+
+// 2. Use the verified path
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(imagesPath),
+    RequestPath = "/Images"
+});
+
+/*
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
@@ -146,6 +162,7 @@ app.UseStaticFiles(new StaticFileOptions
 
     //http://localhost:5108/Images/
 });
+*/
 
 app.MapControllers();
 
