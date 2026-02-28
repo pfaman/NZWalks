@@ -167,6 +167,8 @@ Includes:
 * Environment configuration
 * Production build optimization
 * Secure deployment setup
+* CI/CD Pipeline (Azure Devops) – automate deployment for faster, error-free releases
+
 
 ---
 
@@ -174,7 +176,6 @@ Includes:
 
 * Redis Caching
 * Docker Containerization
-* CI/CD Pipeline (GitHub Actions)
 * API Versioning
 * Unit Testing with xUnit
 * Integration Testing
