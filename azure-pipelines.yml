@@ -1,16 +1,13 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - master
 
 pool:
-  name: 'Default' # Pehle 'windows-latest' tha, ise 'Default' kar do'
+  name: 'Default'  # Aapka Mac Agent isi pool mein hai
 
 variables:
   buildConfiguration: 'Release'
+  # Path to your solution file
+  solutionPath: 'NZWalks/NZWalks.sln'
 
 steps:
 - task: UseDotNet@2
@@ -18,18 +15,17 @@ steps:
     packageType: 'sdk'
     version: '9.0.x'
 
-- script: dotnet restore
+- script: dotnet restore $(solutionPath)
   displayName: 'Restore'
 
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet build $(solutionPath) --configuration $(buildConfiguration) --no-restore
   displayName: 'Build'
 
-- script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+- script: dotnet publish NZWalks/NZWalks.API/NZWalks.API.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'AzureConnection' # Isse Step 4 ke baad select karenge
-    appName: 'NZWalks'
+    azureSubscription: 'AzureConnection' # Ensure this is created in Project Settings
+    appName: 'NZWalks'                   # Azure Portal par app ka naam
     package: '$(Build.ArtifactStagingDirectory)'
-
