@@ -8,5 +8,5 @@ public class PingController : ControllerBase
 {
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult Get() => Ok("Ping works! SuccessFully"); // Ping Code Added
+    public IActionResult Get() => Ok("Ping works SuccessFully"); // Ping Code Added
 }
