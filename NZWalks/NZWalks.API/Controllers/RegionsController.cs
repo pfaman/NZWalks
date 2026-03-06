@@ -45,6 +45,10 @@ namespace NZWalks.API.Controllers
             var regionsDomain = await dbContext.Regions.ToListAsync();
             */
 
+            _cache.SetData("testKey", "HelloRedis");
+            var value = _cache.GetData<string>("testKey");
+            Console.WriteLine(value); // should print HelloRedis
+
             try
             {
 
