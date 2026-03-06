@@ -88,7 +88,7 @@ builder.Services.AddRateLimiter(options =>
             partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
             factory: _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 2,
+                PermitLimit = 5,
                 Window = TimeSpan.FromSeconds(10),
                 QueueLimit = 2,
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst
