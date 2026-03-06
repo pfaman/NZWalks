@@ -12,6 +12,8 @@ using Microsoft.Extensions.FileProviders;
 using Serilog;
 using NZWalks.API.Middlewares;
 using NZWalks.API.Caching;
+using System.Threading.RateLimiting;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +69,8 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
+
 builder.Services.AddDbContext<NZWalksDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalks")));
 builder.Services.AddDbContext<NZWalksAuthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -75,6 +79,24 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "Walks_";
 }
 );
+
+// Rate Limiting
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromSeconds(10),
+                QueueLimit = 2,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+            }));
+
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+});
+
 
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
@@ -144,9 +166,13 @@ app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseRateLimiter();
+
+
 app.UseAuthentication();
 
 app.UseAuthorization();
+
 
 var imagesPath = Path.Combine(builder.Environment.ContentRootPath, "Images");
 
