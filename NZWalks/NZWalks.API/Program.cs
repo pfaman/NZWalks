@@ -75,7 +75,7 @@ builder.Services.AddDbContext<NZWalksDbContext>(options => options.UseSqlServer(
 builder.Services.AddDbContext<NZWalksAuthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("ConnectionStrings__Redis");
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
     options.InstanceName = "Walks_";
 }
 );
