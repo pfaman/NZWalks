@@ -45,37 +45,46 @@ namespace NZWalks.API.Controllers
             var regionsDomain = await dbContext.Regions.ToListAsync();
             */
 
-            logger.LogInformation("Get All Message Invoked");
-
-            var regions = _cache.GetData<IEnumerable<RegionDto>>("regions");
-
-            if (regions is not null)
+            try
             {
-                return Ok(regions);
-            }
 
-            var regionsDomain = await regionRepository.GetAllAsync();
+                logger.LogInformation("Get All Message Invoked");
 
-            /* Commented for MApper
+                var regions = _cache.GetData<IEnumerable<RegionDto>>("regions");
 
-            // Convert Dmain regions to DTO regions
-            var regionsDTO = new List<RegionDto>();
-            foreach (var regionDomain in regionsDomain)
-            {
-                regionsDTO.Add(new RegionDto
+                if (regions is not null)
                 {
-                    Id = regionDomain.Id,
-                    Code = regionDomain.Code,
-                    Name = regionDomain.Name,
-                    RegionImageUrl = regionDomain.RegionImageUrl
-                });
-            }
-            */
+                    return Ok(regions);
+                }
 
-            var regionsDTO = mapper.Map<List<RegionDto>>(regionsDomain);
-            _cache.SetData("regions", regionsDTO);
-            logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
-            return Ok(regionsDTO);
+                var regionsDomain = await regionRepository.GetAllAsync();
+
+                /* Commented for MApper
+
+                // Convert Dmain regions to DTO regions
+                var regionsDTO = new List<RegionDto>();
+                foreach (var regionDomain in regionsDomain)
+                {
+                    regionsDTO.Add(new RegionDto
+                    {
+                        Id = regionDomain.Id,
+                        Code = regionDomain.Code,
+                        Name = regionDomain.Name,
+                        RegionImageUrl = regionDomain.RegionImageUrl
+                    });
+                }
+                */
+
+                var regionsDTO = mapper.Map<List<RegionDto>>(regionsDomain);
+                _cache.SetData("regions", regionsDTO);
+                logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
+                return Ok(regionsDTO);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Error in GetAll Regions");
+                throw;
+            }
         }
 
 
