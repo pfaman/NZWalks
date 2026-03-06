@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using NZWalks.API.Caching;
 using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Repositories;
@@ -15,6 +16,7 @@ namespace NZWalks.API.Controllers
     {
         public readonly IMapper Mapper;
         private readonly IWalkRepository walkRepository;
+
 
         public WalksController(IMapper mapper, IWalkRepository walkRepository)
         {
@@ -62,6 +64,7 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
         [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
         {
+
 
             var walksDomianModel = await walkRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
 

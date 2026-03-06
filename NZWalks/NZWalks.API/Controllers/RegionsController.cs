@@ -8,7 +8,7 @@ using NZWalks.API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
-
+using NZWalks.API.Caching;
 
 namespace NZWalks.API.Controllers
 {
@@ -22,13 +22,17 @@ namespace NZWalks.API.Controllers
 
         private readonly IMapper mapper;
         private readonly ILogger<RegionsController> logger;
+        private readonly IRedisCacheService _cache;
 
-        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger)
+
+        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository,
+        IMapper mapper, ILogger<RegionsController> logger, IRedisCacheService cache)
         {
             this.dbContext = dbContext;
             this.regionRepository = regionRepository;
             this.mapper = mapper;
             this.logger = logger;
+            this._cache = cache;
         }
         // GET All Region
         // GEt https://localhost:portNumber/api/regions
@@ -42,6 +46,13 @@ namespace NZWalks.API.Controllers
             */
 
             logger.LogInformation("Get All Message Invoked");
+
+            var regions = _cache.GetData<IEnumerable<RegionDto>>("regions");
+
+            if (regions is not null)
+            {
+                return Ok(regions);
+            }
 
             var regionsDomain = await regionRepository.GetAllAsync();
 
@@ -60,9 +71,10 @@ namespace NZWalks.API.Controllers
                 });
             }
             */
-            logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
 
             var regionsDTO = mapper.Map<List<RegionDto>>(regionsDomain);
+            _cache.SetData("regions", regionsDTO);
+            logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
             return Ok(regionsDTO);
         }
 
