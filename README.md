@@ -169,6 +169,7 @@ Includes:
 * Secure deployment setup
 * CI/CD Pipeline (Azure Devops) – automate deployment for faster, error-free releases
 * Azure Redis Cache integration for high-performance distributed caching
+* API Rate Limiting to prevent abuse and ensure fair usage of the API
 
 ---
 
