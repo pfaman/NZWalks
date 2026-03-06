@@ -50,7 +50,16 @@ namespace NZWalks.API.Controllers
 
                 logger.LogInformation("Get All Message Invoked");
 
-                var regions = _cache.GetData<IEnumerable<RegionDto>>("regions");
+                IEnumerable<RegionDto>? regions = null;
+
+                try
+                {
+                    regions = _cache.GetData<IEnumerable<RegionDto>>("regions");
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWarning("Redis not available");
+                }
 
                 if (regions is not null)
                 {
@@ -76,7 +85,15 @@ namespace NZWalks.API.Controllers
                 */
 
                 var regionsDTO = mapper.Map<List<RegionDto>>(regionsDomain);
-                _cache.SetData("regions", regionsDTO);
+                try
+                {
+                    _cache.SetData("regions", regionsDTO);
+                }
+                catch
+                {
+                    logger.LogWarning("Redis set failed");
+                }
+
                 logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
                 return Ok(regionsDTO);
             }
