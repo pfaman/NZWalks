@@ -45,9 +45,9 @@ namespace NZWalks.API.Controllers
             var regionsDomain = await dbContext.Regions.ToListAsync();
             */
 
-            _cache.SetData("testKey", "HelloRedis");
-            var value = _cache.GetData<string>("testKey");
-            Console.WriteLine(value); // should print HelloRedis
+            // _cache.SetData("testKey", "HelloRedis");
+            // var value = _cache.GetData<string>("testKey");
+            // Console.WriteLine(value); // should print HelloRedis
 
             try
             {
@@ -62,7 +62,7 @@ namespace NZWalks.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning("Redis not available");
+                    logger.LogWarning(ex, "Redis not available");
                 }
 
                 if (regions is not null)
@@ -93,9 +93,9 @@ namespace NZWalks.API.Controllers
                 {
                     _cache.SetData("regions", regionsDTO);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    logger.LogWarning("Redis set failed");
+                    logger.LogWarning(ex, "Redis set failed");
                 }
 
                 logger.LogInformation($"Finish Get AllRegions Request with Data : {JsonSerializer.Serialize(regionsDomain)}");
